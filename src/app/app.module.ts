@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { InputComponent } from './shared/components/input/input.component';
 import { InputDirective } from './shared/directives/input.directive';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ValidationMessageComponent } from './shared/components/validation-messa
     LoginComponent,
     InputComponent,
     InputDirective,
-    ValidationMessageComponent
+    ValidationMessageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

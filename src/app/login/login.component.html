@@ -7,7 +7,9 @@
                 </sxm-input>
 
                 <sxm-validation-message *ngIf="!loginForm.get('username')?.pristine"
-                    [validationErrors]="loginForm.controls.username.errors">
+                    [validationErrors]="loginForm.controls.username.errors"
+                    [customErrors]="{'invalidEmail': 'Enter a valid email address',
+                    'whiteSpace': 'The value cannot start or end with white spaces'}">
                 </sxm-validation-message>
             </div>
 
@@ -15,12 +17,18 @@
                 <sxm-input formControlName="password" label="Password" type="password" [isRequired]="true">
                 </sxm-input>
                 <sxm-validation-message *ngIf="!loginForm.get('password')?.pristine"
-                [validationErrors]="loginForm.controls.password.errors">
-              </sxm-validation-message>
+                    [validationErrors]="loginForm.controls.password.errors">
+                </sxm-validation-message>
             </div>
 
             <button type="submit" class="login-btn" [disabled]="loginForm.invalid"
                 (click)="onLoginClick()">Login</button>
         </form>
+
+        <div class="register-section">
+            <p>Don't have an account?</p>
+            <button class="register-btn" (click)="onRegisterClick()">Register</button>
+        </div>
+
     </div>
 </div>

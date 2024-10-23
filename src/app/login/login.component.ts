@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../auth/shared/services/authentication.service';
 import { LoginDto } from '../../auth/shared/models/login-dto';
+import { Router } from '@angular/router';
+import { emailValidator, whiteSpaceValidator } from '../shared/validators/validators';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup<{ username: FormControl<string | null>; password: FormControl<string | null>; }>;
 
-  constructor(private fb: FormBuilder, private authService: AuthenticationService) {}
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.createForm();
@@ -40,11 +42,18 @@ export class LoginComponent implements OnInit {
     });    
   }
 
+  onRegisterClick() {
+    this.router.navigate(['/register']);
+
+  }
+
   private createForm() {
     return this.fb.group({
       username: this.fb.control('', [
         Validators.required,
-        Validators.maxLength(200),
+        Validators.maxLength(100),
+        emailValidator(),
+        whiteSpaceValidator()
       ]),
       password: this.fb.control('', [
         Validators.required,

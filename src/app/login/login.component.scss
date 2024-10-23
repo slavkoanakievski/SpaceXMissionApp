@@ -43,3 +43,24 @@
   .login-btn:hover {
     background-color: #203a43;
   }
+
+  .register-section {
+    margin-top: 1.5rem;
+    text-align: center;
+  
+    p {
+      margin-bottom: 0.5rem;
+    }
+  
+    .register-btn {
+      background-color: transparent;
+      color: #007bff;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  
+    .register-btn:hover {
+      color: #0056b3;
+    }
+  }
