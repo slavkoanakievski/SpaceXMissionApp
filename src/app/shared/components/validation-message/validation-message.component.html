@@ -1,0 +1,35 @@
+<div class="d-flex flex-column mt-1"
+  *ngIf="validationErrors">
+  <ng-container *ngIf="!useOnlyCustomErrors">
+
+    <ng-container *ngFor="let error of validationErrors | keyvalue">
+
+      <span [ngSwitch]="error.key"
+        class="error-message text-danger">
+
+        <ng-container *ngSwitchCase="'required'">
+          {{'This field is required'}}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'minlength'">
+          {{ 'The minimum length is' }} {{error.value.requiredLength }} {{'characters' }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'The maximum length is' }} {{error.value.requiredLength }} {{'characters' }}
+        </ng-container>
+
+      </span>
+    </ng-container>
+  </ng-container>
+
+
+  <ng-container *ngIf="customErrors">
+    <ng-container *ngFor="let error of customErrors | keyvalue">
+      <span *ngIf="validationErrors && validationErrors[error.key]"
+        class="error-message text-danger">
+        {{ error.value }}
+      </span>
+    </ng-container>
+  </ng-container>
+</div>

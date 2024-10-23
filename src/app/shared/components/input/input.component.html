@@ -1,0 +1,14 @@
+<div class="mt-3">
+    <label *ngIf="label">{{ label }}
+      <small *ngIf="!isRequired"><i>- {{'optional'}}</i></small>
+    </label>
+    <input sxmInput
+      (inputValue)="onChange($event)"
+      [inputConfig]="inputConfig"
+      [value]="value"
+      [disabled]="disabled"
+      [placeholder]="placeholder"
+      [type]="type"
+      [ngClass]="cssClass"
+      class="form-control input">
+  </div>

@@ -1,0 +1,17 @@
+:host.ng-invalid.ng-dirty div input {
+    border: 1px solid #d74528 !important;
+    box-shadow: 0 0 0 0.125em rgb(215, 69, 40, 0.25) !important;
+}
+
+input.input[type='number'] {
+    max-width: 7rem;
+}
+
+.input:focus {
+    border-color: #7979d1 !important;
+    box-shadow: 0 0 0 0.1rem color-mix(in srgb, #7979d1 30%, transparent) !important;
+}
+
+.input:hover {
+    border-color: #7979d1 !important;
+}
