@@ -1,22 +1,36 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../../auth/shared/services/authentication.service';
-import { LoginDto } from '../../../auth/shared/models/login-dto';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { AuthenticationService } from '../../../auth/services/authentication.service';
+import { LoginDto } from '../../../auth/models/login-dto';
 import { Router } from '@angular/router';
-import { emailValidator, whiteSpaceValidator } from '../../shared/validators/validators';
+import {
+  emailValidator,
+  whiteSpaceValidator,
+} from '../../shared/validators/validators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [AuthenticationService],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup<{
+    username: FormControl<string | null>;
+    password: FormControl<string | null>;
+  }>;
 
-  loginForm: FormGroup<{ username: FormControl<string | null>; password: FormControl<string | null>; }>;
-
-  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.createForm();
@@ -28,23 +42,34 @@ export class LoginComponent implements OnInit {
     }
     const loginDto: LoginDto = {
       username: this.loginForm.controls.username.value ?? '',
-      password: this.loginForm.controls.password.value ?? ''
+      password: this.loginForm.controls.password.value ?? '',
     };
-    
-    console.log("loginv", this.loginForm.controls.password.value, this.loginForm.controls.username.value);
+
+    console.log(
+      'login form data, username, password',
+      this.loginForm.controls.username.value,
+      this.loginForm.controls.password.value
+    );
     this.authService.loginUser(loginDto).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
+        if (response.success && response.data) {
+          console.log(
+            'Login successful',
+            response.data.accessToken,
+            response.data.refreshToken
+          );
+        } else {
+          console.log('Unuccessful', response.errorMessage);
+        }
       },
       error: (err) => {
         console.error('Login failed', err);
-      }
-    });    
+      },
+    });
   }
 
   onRegisterClick() {
     this.router.navigate(['/register']);
-
   }
 
   private createForm() {
@@ -53,7 +78,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.maxLength(100),
         emailValidator(),
-        whiteSpaceValidator()
+        whiteSpaceValidator(),
       ]),
       password: this.fb.control('', [
         Validators.required,
@@ -61,6 +86,4 @@ export class LoginComponent implements OnInit {
       ]),
     });
   }
-
-
 }
