@@ -19,7 +19,7 @@ export interface InputConfig {
 })
 export class InputComponent implements ControlValueAccessor{
   @Input() inputConfig: InputConfig = {
-    debounceTime: 250,
+    debounceTime: 350,
     minKeyStrokes: 0,
   };
 

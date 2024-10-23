@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+$primary: #1b5270;
+$primary-light: #23678b;
+$primary-dark: #082a3d;
+$secondary: #33a3c5;
+$secondary-light: #38a1b4;
+$secondary-dark: #2a8caa;
+$danger: #d74528;
+$danger-light: #f4e9eb;
+$link: #0c7ab8;
+$link-light: #e1e7eb;
+$info: #0c7ab8;
+$info-light: #e1e7eb;
+$success: #5acd95;
+$success-light: #ecf1e9;
+$warning: #ff7d00;
+$warning-light: #f5ead8;
+$gray-dark: #cacad8;
+$default: #dadada;
+$light: #f8f9fa;
+
+// Overwrite global CSS variables
+:root {
+    --sxm-primary: #{$primary};
+    --sxm-primary-light: #{$primary-light};
+    --sxm-primary-dark: #{$primary-dark};
+    --sxm-secondary: #{$secondary};
+    --sxm-secondary-light: #{$secondary-light};
+    --sxm-secondary-dark: #{$secondary-dark};
+    --sxm-danger: #{$danger};
+    --sxm-danger-light: #{$danger-light};
+    --sxm-link: #{$link};
+    --sxm-link-light: #{$link-light};
+    --sxm-info: #{$info};
+    --sxm-info-light: #{$info-light};
+    --sxm-success: #{$success};
+    --sxm-success-light: #{$success-light};
+    --sxm-warning: #{$warning};
+    --sxm-warning-light: #{$warning-light};
+    --sxm-gray-dark: #{$gray-dark};
+    --sxm-default: #{$default};
+    --sxm-light: #{$light};
+}
+
+// override bootstrap's colors
+$theme-colors: (
+    "primary": $primary,
+    "primary-light": $primary-light,
+    "primary-dark": $primary-dark,
+    "secondary": $secondary,
+    "secondary-light": $secondary-light,
+    "secondary-dark": $secondary-dark,
+    "danger": $danger,
+    "danger-light": $danger-light,
+    "success": $success,
+    "success-light": $success-light,
+    "link": $link,
+    "link-light": $link-light,
+    "info": $info,
+    "info-light": $info-light,
+    "warning": $warning,
+    "warning-light": $warning-light,
+    "gray-dark": $gray-dark,
+    "default": $default,
+    "light": $light,
+);
+
+@import "bootstrap/scss/bootstrap";

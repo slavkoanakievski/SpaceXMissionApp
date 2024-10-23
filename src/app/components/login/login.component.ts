@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../auth/shared/services/authentication.service';
-import { LoginDto } from '../../auth/shared/models/login-dto';
+import { AuthenticationService } from '../../../auth/shared/services/authentication.service';
+import { LoginDto } from '../../../auth/shared/models/login-dto';
 import { Router } from '@angular/router';
-import { emailValidator, whiteSpaceValidator } from '../shared/validators/validators';
+import { emailValidator, whiteSpaceValidator } from '../../shared/validators/validators';
 
 @Component({
   selector: 'app-login',
