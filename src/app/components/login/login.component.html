@@ -2,7 +2,7 @@
     <div class="login-card">
         <h1 class="login-title">SpaceX Mission Login</h1>
         <form [formGroup]="loginForm">
-            <div class="form-control">
+            <div class="mb-2">
                 <sxm-input formControlName="username" label="Username" [isRequired]="true">
                 </sxm-input>
 
@@ -13,11 +13,12 @@
                 </sxm-validation-message>
             </div>
 
-            <div class="form-control">
+            <div class="mb-2">
                 <sxm-input formControlName="password" label="Password" type="password" [isRequired]="true">
                 </sxm-input>
                 <sxm-validation-message *ngIf="!loginForm.get('password')?.pristine"
-                    [validationErrors]="loginForm.controls.password.errors">
+                    [validationErrors]="loginForm.controls.password.errors"
+                    [customErrors]="{'strongPassword': 'Password must be 8+ characters with uppercase, lowercase, number and special character'}">
                 </sxm-validation-message>
             </div>
 

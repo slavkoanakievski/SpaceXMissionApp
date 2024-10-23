@@ -13,6 +13,8 @@ import { ValidationMessageComponent } from './components/validation-message/vali
 import { RegisterComponent } from './components/register/register.component';
 import { StoreModule } from '@ngrx/store';
 import { AuthInterceptor } from '../auth/interceptors/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { AuthInterceptor } from '../auth/interceptors/auth.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthenticationService,

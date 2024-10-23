@@ -1,5 +1,5 @@
 import { AbstractControl, ValidatorFn } from "@angular/forms";
-import { emailPattern, notStartingOrEndingWithWhitespace } from "../patterns/common-patterns";
+import { emailPattern, notStartingOrEndingWithWhitespace, passwordPattern } from "../patterns/common-patterns";
 
 export function emailValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -20,3 +20,13 @@ export function emailValidator(): ValidatorFn {
       return valid ? null : { whiteSpace: true };
     };
   }
+
+    export function passwordValidator(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        if (!control.value) {
+          return null;
+        }
+        const valid = passwordPattern.test(control.value);
+        return valid ? null : { strongPassword: true };
+      };
+    }

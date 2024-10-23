@@ -1,0 +1,68 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, var(--sxm-primary-dark), var(--sxm-primary), var(--sxm-primary-light));
+}
+
+.register-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.313rem 1rem rgba(0, 0, 0, 0.3);
+    width: 29rem;
+    margin: 0 1rem;
+}
+
+.register-title {
+    text-align: center;
+    color: var(--sxm-primary);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--sxm-primary);
+    color: white;
+    border: none;
+    border-radius: 0.313rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-btn:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+.register-btn:hover:not(:disabled) {
+    background-color: var(--sxm-primary-light);
+}
+
+.login-section {
+    margin-top: 1.5rem;
+    text-align: center;
+
+    p {
+        margin-bottom: 0.5rem;
+    }
+
+    .login-btn {
+        background-color: transparent;
+        color: var(--sxm-link);
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .login-btn:hover {
+        color: var(--sxm-link);
+        text-decoration: underline;
+    }
+}

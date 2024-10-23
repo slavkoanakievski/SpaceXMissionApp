@@ -10,8 +10,10 @@ import { LoginDto } from '../../../auth/models/login-dto';
 import { Router } from '@angular/router';
 import {
   emailValidator,
+  passwordValidator,
   whiteSpaceValidator,
 } from '../../shared/validators/validators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -58,8 +61,10 @@ export class LoginComponent implements OnInit {
             response.data.accessToken,
             response.data.refreshToken
           );
+          this.toastr.success('You are online!');
         } else {
           console.log('Unuccessful', response.errorMessage);
+          this.toastr.error(response.errorMessage);
         }
       },
       error: (err) => {
@@ -83,6 +88,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [
         Validators.required,
         Validators.maxLength(40),
+        passwordValidator(),
       ]),
     });
   }

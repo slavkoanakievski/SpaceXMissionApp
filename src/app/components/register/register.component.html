@@ -1,1 +1,58 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="register-card">
+        <h1 class="register-title">SpaceX Mission Register</h1>
+        <form [formGroup]="registerForm">
+            <div class="form-group">
+                <sxm-input formControlName="firstName" label="First Name" [isRequired]="true">
+                </sxm-input>
+                <sxm-validation-message *ngIf="!registerForm.get('firstName')?.pristine"
+                    [validationErrors]="registerForm.controls.firstName.errors"
+                    [customErrors]="{'whiteSpace': 'The value cannot start or end with white spaces'}">
+                </sxm-validation-message>
+            </div>
+
+            <div class="form-group">
+                <sxm-input formControlName="lastName" label="Last Name" [isRequired]="true">
+                </sxm-input>
+                <sxm-validation-message *ngIf="!registerForm.get('lastName')?.pristine"
+                    [validationErrors]="registerForm.controls.lastName.errors"
+                    [customErrors]="{'whiteSpace': 'The value cannot start or end with white spaces'}">
+                </sxm-validation-message>
+            </div>
+
+            <div class="form-group">
+                <sxm-input formControlName="email" label="Email" [isRequired]="true">
+                </sxm-input>
+                <sxm-validation-message *ngIf="!registerForm.get('email')?.pristine"
+                    [validationErrors]="registerForm.controls.email.errors" [customErrors]="{'invalidEmail': 'Enter a valid email address',
+                    'whiteSpace': 'The value cannot start or end with white spaces'}">
+                </sxm-validation-message>
+            </div>
+
+            <div class="form-group">
+                <sxm-input formControlName="password" label="Password" type="password" [isRequired]="true">
+                </sxm-input>
+                <sxm-validation-message *ngIf="!registerForm.get('password')?.pristine"
+                    [validationErrors]="registerForm.controls.password.errors">
+                </sxm-validation-message>
+            </div>
+
+            <div class="form-group">
+                <sxm-input formControlName="confirmPassword" label="Confirm Password" type="password"
+                    [isRequired]="true">
+                </sxm-input>
+                <sxm-validation-message *ngIf="!registerForm.get('confirmPassword')?.pristine"
+                    [validationErrors]="registerForm.controls.confirmPassword.errors">
+                </sxm-validation-message>
+            </div>
+
+            <button type="submit" class="register-btn" [disabled]="registerForm.invalid"
+                (click)="onRegisterSubmit()">Register</button>
+        </form>
+
+        <div class="login-section">
+            <p>Already have an account?</p>
+            <button class="login-btn" (click)="onLoginClick()">Login</button>
+        </div>
+    </div>
+</div>
