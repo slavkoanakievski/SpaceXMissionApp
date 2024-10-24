@@ -23,21 +23,24 @@ export class AuthenticationService {
         loginDto
       )
       .pipe(
+        filter((resp) => resp.success),
         map((response) => {
           if (response.success) {
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
-          } else {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
           }
           return response;
         })
       );
   }
 
-  public registerUser(registerDto: RegisterDto): Observable<ApiResponse<string>> {
-    return this.http.post<ApiResponse<string>>(`${this._baseUrl}/register`, registerDto);
+  public registerUser(
+    registerDto: RegisterDto
+  ): Observable<ApiResponse<string>> {
+    return this.http.post<ApiResponse<string>>(
+      `${this._baseUrl}/register`,
+      registerDto
+    );
   }
 
   public refreshToken(tokenDto: TokenDto): Observable<ApiResponse<TokenDto>> {

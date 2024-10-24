@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [
         Validators.required,
         Validators.maxLength(40),
+        Validators.minLength(8),
         passwordValidator(),
       ]),
     });

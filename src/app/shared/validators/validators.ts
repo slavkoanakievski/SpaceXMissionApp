@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { emailPattern, notStartingOrEndingWithWhitespace, passwordPattern } from "../patterns/common-patterns";
 
 export function emailValidator(): ValidatorFn {
@@ -28,5 +28,34 @@ export function emailValidator(): ValidatorFn {
         }
         const valid = passwordPattern.test(control.value);
         return valid ? null : { strongPassword: true };
+      };
+    }
+
+    export function matchingPasswordValidator(
+      password: string,
+      confirmPassword: string
+    ): ValidatorFn {
+      return (formGroup: AbstractControl): ValidationErrors | null => {
+        const passwordControl = formGroup.get(password);
+        const confirmPasswordControl = formGroup.get(confirmPassword);
+
+        if (!passwordControl || !confirmPasswordControl) {
+          return null;
+        }
+
+        if (
+          confirmPasswordControl.errors &&
+          !confirmPasswordControl.errors['passwordMismatch']
+        ) {
+          return null;
+        }
+
+        if (passwordControl.value !== confirmPasswordControl.value) {
+          confirmPasswordControl.setErrors({ passwordMismatch: true });
+        } else {
+          confirmPasswordControl.setErrors(null);
+        }
+
+        return null;
       };
     }

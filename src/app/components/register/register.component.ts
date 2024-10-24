@@ -10,6 +10,8 @@ import { RegisterDto } from '../../../auth/models/register-dto';
 import { Router } from '@angular/router';
 import {
   emailValidator,
+  matchingPasswordValidator,
+  passwordValidator,
   whiteSpaceValidator,
 } from '../../shared/validators/validators';
 import { ToastrService } from 'ngx-toastr';
@@ -78,33 +80,39 @@ export class RegisterComponent implements OnInit {
   }
 
   private createForm() {
-    return this.fb.group({
-      firstName: this.fb.control('', [
-        Validators.required,
-        Validators.maxLength(50),
-        whiteSpaceValidator(),
-      ]),
-      lastName: this.fb.control('', [
-        Validators.required,
-        Validators.maxLength(50),
-        whiteSpaceValidator(),
-      ]),
-      email: this.fb.control('', [
-        Validators.required,
-        Validators.maxLength(100),
-        emailValidator(),
-        whiteSpaceValidator(),
-      ]),
-      password: this.fb.control('', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(40),
-      ]),
-      confirmPassword: this.fb.control('', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(40),
-      ]),
-    });
+    return this.fb.group(
+      {
+        firstName: this.fb.control('', [
+          Validators.required,
+          Validators.maxLength(50),
+          whiteSpaceValidator(),
+        ]),
+        lastName: this.fb.control('', [
+          Validators.required,
+          Validators.maxLength(50),
+          whiteSpaceValidator(),
+        ]),
+        email: this.fb.control('', [
+          Validators.required,
+          Validators.maxLength(100),
+          emailValidator(),
+          whiteSpaceValidator(),
+        ]),
+        password: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(40),
+          passwordValidator(),
+        ]),
+        confirmPassword: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(40),
+        ]),
+      },
+      {
+        validators: matchingPasswordValidator('password', 'confirmPassword'),
+      }
+    );
   }
 }

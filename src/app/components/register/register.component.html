@@ -24,7 +24,8 @@
                 <sxm-input formControlName="email" label="Email" [isRequired]="true">
                 </sxm-input>
                 <sxm-validation-message *ngIf="!registerForm.get('email')?.pristine"
-                    [validationErrors]="registerForm.controls.email.errors" [customErrors]="{'invalidEmail': 'Enter a valid email address',
+                    [validationErrors]="registerForm.controls.email.errors"
+                    [customErrors]="{'invalidEmail': 'Enter a valid email address',
                     'whiteSpace': 'The value cannot start or end with white spaces'}">
                 </sxm-validation-message>
             </div>
@@ -33,7 +34,8 @@
                 <sxm-input formControlName="password" label="Password" type="password" [isRequired]="true">
                 </sxm-input>
                 <sxm-validation-message *ngIf="!registerForm.get('password')?.pristine"
-                    [validationErrors]="registerForm.controls.password.errors">
+                    [validationErrors]="registerForm.controls.password.errors"
+                    [customErrors]="{'strongPassword': 'Password must be 8+ characters with uppercase, lowercase, number and special character'}">
                 </sxm-validation-message>
             </div>
 
@@ -42,7 +44,8 @@
                     [isRequired]="true">
                 </sxm-input>
                 <sxm-validation-message *ngIf="!registerForm.get('confirmPassword')?.pristine"
-                    [validationErrors]="registerForm.controls.confirmPassword.errors">
+                    [validationErrors]="registerForm.controls.confirmPassword.errors"
+                    [customErrors]="{'passwordMismatch': 'Passwords do not match!'}">
                 </sxm-validation-message>
             </div>
 
