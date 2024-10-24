@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { SpacexLatestLaunchComponent } from './components/spacex-latest-launch/spacex-latest-launch.component';
 
 const routes: Routes = [
   {
@@ -19,10 +20,15 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'spacex-latest-launch',
+    component: SpacexLatestLaunchComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -47,29 +47,14 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls.username.value ?? '',
       password: this.loginForm.controls.password.value ?? '',
     };
-
-    console.log(
-      'login form data, username, password',
-      this.loginForm.controls.username.value,
-      this.loginForm.controls.password.value
-    );
-    this.authService.loginUser(loginDto).subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          console.log(
-            'Login successful',
-            response.data.accessToken,
-            response.data.refreshToken
-          );
-          this.toastr.success('You are online!');
-        } else {
-          console.log('Unuccessful', response.errorMessage);
-          this.toastr.error(response.errorMessage);
-        }
-      },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
+    
+    this.authService.loginUser(loginDto).subscribe((response) => {
+      if (response.success && response.data) {
+        this.toastr.success('You are online!');
+        this.router.navigate(['/spacex-latest-launch']);
+      } else {
+        this.toastr.error(response.errorMessage);
+      }
     });
   }
 

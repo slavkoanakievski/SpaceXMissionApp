@@ -1,0 +1,61 @@
+.mission-card {
+  background-color: var(--sxm-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  transition: transform 0.2s;
+}
+
+.mission-card:hover {
+  transform: scale(1.02);
+}
+
+.mission-title {
+  font-size: 1.8rem;
+  color: var(--sxm-primary);
+  margin-bottom: 15px;
+}
+
+.mission-details {
+  display: flex;
+  align-items: center;
+}
+
+.mission-image {
+  max-width: 200px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.info {
+  flex: 1;
+}
+
+.links {
+  margin-top: 10px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.success {
+  border-left: 5px solid var(--sxm-success);
+}
+
+.failure {
+  border-left: 5px solid var(--sxm-danger);
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.success {
+  color: var(--sxm-success);
+}
+
+.status.failure {
+  color: var(--sxm-danger);
+}

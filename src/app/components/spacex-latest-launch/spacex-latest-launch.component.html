@@ -1,0 +1,32 @@
+<div *ngIf="mission$ | async as mission" class="mission-card"
+  [ngClass]="{'success': mission.data.success, 'failure': !mission.data.success}">
+  <h2 class="mission-title">{{ mission.data.name }}</h2>
+
+  <div class="mission-details">
+    <img [src]="mission.data.largeImageUrl" alt="{{ mission.data.name }}" class="mission-image" />
+
+    <div class="info">
+      <p *ngIf="mission.data.flightNumber"><strong>Flight Number:</strong> {{ mission.data.flightNumber }}</p>
+      <p><strong>Date: </strong> {{ mission.data.dateUtc | date: 'fullDate' }}</p>
+      <p><strong>Status: </strong> <span [ngClass]="mission.data.success ? 'status text-success' : 'status text-danger'">{{
+          mission.data.success ? 'Successful' : 'Failed' }}</span></p>
+      <p *ngIf="mission.data.rocket"><strong>Rocket:</strong> {{ mission.data.rocket }}</p>
+
+      <p *ngIf="mission.data.crew && mission.data.crew.length > 0">
+        <strong>Crew: </strong>
+        <span *ngFor="let crewMember of mission.data.crew; let last = last">
+          {{ crewMember.role }} ({{ crewMember.crew }}){{ !last ? ', ' : '' }}
+        </span>
+      </p>
+
+      <div class="links">
+        <a [href]="mission.data.webcast" target="_blank" class="btn btn-gray-dark">Watch Webcast</a>
+        <a [href]="mission.data.wikipedia" target="_blank" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(mission$ | async) === null">
+  <p>Loading missions...</p>
+</div>
