@@ -1,8 +1,7 @@
-<div *ngIf="upcomingMissions$ | async as response">
+<div *ngIf="allMissions.length > 0">
     <div class="launches-container">
-        <div *ngFor="let mission of response.data" class="mission-card"
+        <div *ngFor="let mission of displayedMissions" class="mission-card"
             [ngClass]="{'success': mission.success, 'failure': !mission.success}">
-
             <div class="mission-image-container">
                 <ng-container *ngIf="mission.smallImageUrl; else noImage">
                     <img [src]="mission.smallImageUrl" alt="{{ mission.name }}" class="mission-image" />
@@ -13,7 +12,6 @@
                     </div>
                 </ng-template>
             </div>
-
             <div class="mission-info">
                 <h3 class="mission-title">{{ mission.name }}</h3>
                 <p class="launch-date">{{ mission.dateUtc | date: 'MMM d, y' }}</p>
@@ -26,11 +24,12 @@
                 </div>
                 <div class="mission-links">
                     <a *ngIf="mission.webcast" [href]="mission.webcast" target="_blank" class="btn btn-light">Watch</a>
-                    <a *ngIf="mission.wikipedia" [href]="mission.wikipedia" target="_blank" class="btn btn-primary">
-                        Read More</a>
+                    <a *ngIf="mission.wikipedia" [href]="mission.wikipedia" target="_blank" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <sxm-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)">
+    </sxm-pagination>
 </div>

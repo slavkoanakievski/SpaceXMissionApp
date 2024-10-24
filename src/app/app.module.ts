@@ -17,6 +17,7 @@ import { SpacexLatestLaunchComponent } from './components/spacex-latest-launch/s
 import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-launches/spacex-upcoming-launches.component';
 import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
 import { InputDirective } from './directives/input.directive';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { InputDirective } from './directives/input.directive';
     SpacexLatestLaunchComponent,
     NavbarComponent,
     SpacexUpcomingLaunchesComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

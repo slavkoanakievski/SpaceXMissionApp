@@ -32,14 +32,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'spacex-past-launches',
+    component: SpacexUpcomingLaunchesComponent,
+    data: { launchType: 'past' },
+  },
+  {
     path: '**',
     component: NotFoundComponent,
+    canActivate: [AuthGuard],
   },
-  // {
-  //   path: 'spacex-past-launches',
-  //   component: SpacexPastLaunchesComponent,
-  //   canActivate: [AuthGuard],
-  // },
 ];
 
 @NgModule({

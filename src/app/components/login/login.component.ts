@@ -51,11 +51,9 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginUser(loginDto).subscribe((response) => {
       if (response.success && response.data) {
-        console.log('Login successful', response.data);
         this.toastrService.success('Login successful');
         this.router.navigate(['/spacex-latest-launch']);
       } else {
-        console.log('Login unsuccessful', response.errorMessage);
         this.toastrService.error(response.errorMessage);
       }
     });
