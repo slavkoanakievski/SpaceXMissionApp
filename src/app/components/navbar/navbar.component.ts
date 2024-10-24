@@ -1,15 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../../auth/services/authentication.service';
 
 @Component({
   selector: 'sxm-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
-  public activeMissionType: string = 'latest'; // Default active mission type
+export class NavbarComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  user: string | null = null;
 
-  public changeMissionType(type: string): void {
-    this.activeMissionType = type;
-    // Emit an event or call a service to fetch data based on the selected type
+  constructor(private authService: AuthenticationService) {}
+
+  ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
+
+    this.authService.user$.subscribe((user) => {
+      this.user = user;
+    });
+
+    if (this.authService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.user = this.authService.getUserName();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

@@ -3,7 +3,7 @@
   <h2 class="mission-title">{{ mission.data.name }}</h2>
 
   <div class="mission-details">
-    <img [src]="mission.data.largeImageUrl" alt="{{ mission.data.name }}" class="mission-image" />
+    <img [src]="mission.data.largeImageUrl || mission.data.smallImageUrl" alt="{{ mission.data.name }}" class="mission-image" />
 
     <div class="info">
       <p *ngIf="mission.data.flightNumber"><strong>Flight Number:</strong> {{ mission.data.flightNumber }}</p>
@@ -25,8 +25,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="(mission$ | async) === null">
-  <p>Loading missions...</p>
 </div>

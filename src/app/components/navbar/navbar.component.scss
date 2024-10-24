@@ -22,14 +22,14 @@
 }
 
 .nav-link:hover {
-    background-color: var(--sxm-secondary);
+    background-color: var(--sxm-primary-light);
     border-radius: 4px;
     color: white;
     cursor: pointer;
 }
 
 .nav-link.active {
-    background-color: var(--sxm-secondary);
+    background-color: var(--sxm-primary-light);
     color: white;
     border-radius: 4px;
     font-weight: bold;

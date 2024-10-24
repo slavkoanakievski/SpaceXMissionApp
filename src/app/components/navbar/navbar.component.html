@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isLoggedIn">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">SpaceX Missions</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -8,16 +8,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" (click)="changeMissionType('latest')"
-                        [class.active]="activeMissionType === 'latest'">Latest Launch</a>
+                    <a class="nav-link" [routerLink]="'/spacex-latest-launch'" routerLinkActive="active">
+                        Latest Launch</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="changeMissionType('upcoming')"
-                        [class.active]="activeMissionType === 'upcoming'">Upcoming Launches</a>
+                    <a class="nav-link" [routerLink]="'/spacex-upcoming-launches'" routerLinkActive="active">
+                        Upcoming Launches</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="changeMissionType('past')"
-                        [class.active]="activeMissionType === 'past'">Past Launches</a>
+                    <a class="nav-link" [routerLink]="'/spacex-past-launches'" routerLinkActive="active">
+                        Past Launches</a>
+                </li>
+                <li class="nav-item mt-2" *ngIf="user">
+                    <span class="navbar-text me-3">Welcome, {{ user }}!</span>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-gray-dark" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>

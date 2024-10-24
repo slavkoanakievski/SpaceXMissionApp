@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { SpacexLatestLaunchComponent } from './components/spacex-latest-launch/spacex-latest-launch.component';
+import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-launches/spacex-upcoming-launches.component';
 
 const routes: Routes = [
   {
@@ -18,13 +19,22 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'spacex-latest-launch',
     component: SpacexLatestLaunchComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'spacex-upcoming-launches',
+    component: SpacexUpcomingLaunchesComponent,
+    canActivate: [AuthGuard],
+  },
+  // {
+  //   path: 'spacex-past-launches',
+  //   component: SpacexPastLaunchesComponent,
+  //   canActivate: [AuthGuard],
+  // },
 ];
 
 @NgModule({

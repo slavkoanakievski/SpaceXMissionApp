@@ -1,25 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { BehaviorSubject, filter, map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { LoginDto } from '../models/login-dto';
 import { RegisterDto } from '../models/register-dto';
 import { AuthenticatedResponse } from '../models/authenticated-response';
 import { ApiResponse } from '../models/api-response';
 import { TokenDto } from '../models/token-dto';
+import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthenticationService {
   private _baseUrl = `${environment.apiBase}/user`;
-  private hasLoggedUserSubject: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) {
-    this.hasLoggedUserSubject = new BehaviorSubject<boolean>(false);
-  }
+  // BehaviorSubject to track user login state
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  public loggedIn$ = this.loggedInSubject.asObservable(); // Expose the observable to the rest of the app
 
-  get hasLoggedUser$() {
-    return this.hasLoggedUserSubject.asObservable();
-  }
+  private userSubject = new BehaviorSubject<string | null>(this.getUserName());
+  public user$ = this.userSubject.asObservable();
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   public loginUser(
     loginDto: LoginDto
@@ -30,12 +33,14 @@ export class AuthenticationService {
         loginDto
       )
       .pipe(
-        filter((resp) => resp.success),
         map((response) => {
           if (response.success) {
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
-            this.hasLoggedUserSubject.next(true);
+            localStorage.setItem('userName', response.data.userName);
+
+            this.loggedInSubject.next(true);
+            this.userSubject.next(response.data.accessToken);
           }
           return response;
         })
@@ -58,7 +63,20 @@ export class AuthenticationService {
     );
   }
 
+  public logout(): void {
+    localStorage.removeItem('accessToken');
+
+    // Update BehaviorSubject values on logout
+    this.loggedInSubject.next(false);
+    this.userSubject.next(null);
+    this.router.navigate(['/login']);
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem('accessToken') !== null;
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem('userName');
   }
 }

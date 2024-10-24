@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
-    private toastr: ToastrService
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,17 +43,20 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+
     const loginDto: LoginDto = {
       username: this.loginForm.controls.username.value ?? '',
       password: this.loginForm.controls.password.value ?? '',
     };
-    
+
     this.authService.loginUser(loginDto).subscribe((response) => {
       if (response.success && response.data) {
-        this.toastr.success('You are online!');
+        console.log('Login successful', response.data);
+        this.toastrService.success('Login successful');
         this.router.navigate(['/spacex-latest-launch']);
       } else {
-        this.toastr.error(response.errorMessage);
+        console.log('Login unsuccessful', response.errorMessage);
+        this.toastrService.error(response.errorMessage);
       }
     });
   }
