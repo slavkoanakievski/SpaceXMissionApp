@@ -14,9 +14,9 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SpacexLatestLaunchComponent } from './components/spacex-latest-launch/spacex-latest-launch.component';
+import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-launches/spacex-upcoming-launches.component';
 import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
 import { InputDirective } from './directives/input.directive';
-import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-launches/spacex-upcoming-launches.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-la
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-  ],
+      ],
   providers: [
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

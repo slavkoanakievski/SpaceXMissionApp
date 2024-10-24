@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { SpacexLatestLaunchComponent } from './components/spacex-latest-launch/spacex-latest-launch.component';
 import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-launches/spacex-upcoming-launches.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
     path: 'spacex-upcoming-launches',
     component: SpacexUpcomingLaunchesComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
   // {
   //   path: 'spacex-past-launches',

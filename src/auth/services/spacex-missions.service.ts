@@ -28,4 +28,12 @@ export class SpacexMissionsService {
       `${this._baseUrl}/past`
     );
   }
+
+  public getUpcomingSpaceXMissions(): Observable<
+    ApiResponse<SpacexMissionResponse[]>
+  > {
+    return this.http.get<ApiResponse<SpacexMissionResponse[]>>(
+      `${this._baseUrl}/upcoming`
+    );
+  }
 }

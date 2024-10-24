@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isLoggedIn">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">SpaceX Missions</a>
+        <a class="navbar-brand" [routerLink]="'/spacex-latest-launch'">SpaceX Missions</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,22 +8,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'/spacex-latest-launch'" routerLinkActive="active">
-                        Latest Launch</a>
+                    <a class="nav-link" [routerLink]="'/spacex-latest-launch'" routerLinkActive="active">Latest
+                        Launch</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'/spacex-upcoming-launches'" routerLinkActive="active">
-                        Upcoming Launches</a>
+                    <a class="nav-link" [routerLink]="'/spacex-upcoming-launches'" routerLinkActive="active">Upcoming
+                        Launches</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'/spacex-past-launches'" routerLinkActive="active">
-                        Past Launches</a>
+                    <a class="nav-link" [routerLink]="'/spacex-past-launches'" routerLinkActive="active">Past
+                        Launches</a>
                 </li>
-                <li class="nav-item mt-2" *ngIf="user">
-                    <span class="navbar-text me-3">Welcome, {{ user }}!</span>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-gray-dark" (click)="logout()">Logout</button>
+
+                <li class="nav-item dropdown" *ngIf="user">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                        <li><span class="dropdown-item-text">Welcome, {{ user }}!</span></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+                    </ul>
                 </li>
             </ul>
         </div>
