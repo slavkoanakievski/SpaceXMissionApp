@@ -14,8 +14,8 @@
             </div>
             <div class="mission-info">
                 <h3 class="mission-title">{{ mission.name }}</h3>
-                <p class="launch-date">{{ mission.dateUtc | date: 'MMM d, y' }}</p>
-                <p *ngIf="mission.rocket"><strong>Rocket:</strong> {{ mission.rocket }}</p>
+                <p class="launch-date">{{ mission.dateUtc | date:'dd/MM/yyyy, HH:mm' }}</p>
+                <p *ngIf="mission.flightNumber"><strong>Flight Number:</strong> {{ mission.flightNumber }}</p>
                 <div class="crew-list" *ngIf="mission.crew && mission.crew.length > 0">
                     <strong>Crew:</strong>
                     <span *ngFor="let crewMember of mission.crew; let last = last">

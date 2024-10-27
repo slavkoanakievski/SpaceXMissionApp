@@ -15,13 +15,6 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private _baseUrl = `${environment.apiBase}/user`;
 
-  // BehaviorSubject to track user login state
-  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
-  public loggedIn$ = this.loggedInSubject.asObservable(); // Expose the observable to the rest of the app
-
-  private userSubject = new BehaviorSubject<string | null>(this.getUserName());
-  public user$ = this.userSubject.asObservable();
-
   constructor(private http: HttpClient, private router: Router) {}
 
   public loginUser(
@@ -38,9 +31,6 @@ export class AuthenticationService {
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
             localStorage.setItem('userName', response.data.userName);
-
-            this.loggedInSubject.next(true);
-            this.userSubject.next(response.data.accessToken);
           }
           return response;
         })
@@ -65,10 +55,6 @@ export class AuthenticationService {
 
   public logout(): void {
     localStorage.removeItem('accessToken');
-
-    // Update BehaviorSubject values on logout
-    this.loggedInSubject.next(false);
-    this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
 

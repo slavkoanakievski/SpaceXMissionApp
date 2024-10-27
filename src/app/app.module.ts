@@ -18,6 +18,7 @@ import { SpacexUpcomingLaunchesComponent } from './components/spacex-upcoming-la
 import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
 import { InputDirective } from './directives/input.directive';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ErrorInterceptor } from '../auth/interceptors/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -39,10 +40,15 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-      ],
+  ],
   providers: [
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

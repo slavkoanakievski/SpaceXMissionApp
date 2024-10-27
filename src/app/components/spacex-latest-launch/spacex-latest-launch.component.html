@@ -7,7 +7,7 @@
 
     <div class="info">
       <p *ngIf="mission.data.flightNumber"><strong>Flight Number:</strong> {{ mission.data.flightNumber }}</p>
-      <p><strong>Date: </strong> {{ mission.data.dateUtc | date: 'fullDate' }}</p>
+      <p><strong>Date: </strong> {{ mission.data.dateUtc | date:'dd/MM/yyyy, HH:mm' }}</p>
       <p><strong>Status: </strong> <span [ngClass]="mission.data.success ? 'status text-success' : 'status text-danger'">{{
           mission.data.success ? 'Successful' : 'Failed' }}</span></p>
       <p *ngIf="mission.data.rocket"><strong>Rocket:</strong> {{ mission.data.rocket }}</p>
