@@ -9,9 +9,7 @@ import { ApiResponse } from '../models/api-response';
 import { TokenDto } from '../models/token-dto';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthenticationService {
   private _baseUrl = `${environment.apiBase}/user`;
 

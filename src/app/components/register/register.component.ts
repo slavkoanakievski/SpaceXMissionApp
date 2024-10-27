@@ -61,17 +61,12 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(registerDto).subscribe({
       next: (response) => {
         if (response.success && response.data) {
-          console.log('Registration successful', response.data);
           this.toastrService.success('Registration successful');
           this.router.navigate(['/login']);
         } else {
-          console.log('Registration unsuccessful', response.errorMessage);
           this.toastrService.error(response.errorMessage);
         }
-      },
-      error: (err) => {
-        console.error('Registration failed', err);
-      },
+      }
     });
   }
 
