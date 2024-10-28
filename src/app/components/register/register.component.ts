@@ -15,6 +15,7 @@ import {
   whiteSpaceValidator,
 } from '../../shared/validators/validators';
 import { ToastrService } from 'ngx-toastr';
+import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -58,16 +59,20 @@ export class RegisterComponent implements OnInit {
 
     console.log('Register form data', registerDto);
 
-    this.authService.registerUser(registerDto).subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.toastrService.success('Registration successful');
-          this.router.navigate(['/login']);
-        } else {
-          this.toastrService.error(response.errorMessage);
-        }
-      }
-    });
+    this.authService
+      .registerUser(registerDto)
+      .pipe(
+        take(1),
+        tap((response) => {
+          if (response.success && response.data) {
+            this.toastrService.success('Registration successful');
+            this.router.navigate(['/login']);
+          } else {
+            this.toastrService.error(response.errorMessage);
+          }
+        })
+      )
+      .subscribe();
   }
 
   onLoginClick() {

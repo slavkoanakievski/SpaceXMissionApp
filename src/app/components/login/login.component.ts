@@ -14,6 +14,7 @@ import {
   whiteSpaceValidator,
 } from '../../shared/validators/validators';
 import { ToastrService } from 'ngx-toastr';
+import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -49,14 +50,20 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.controls.password.value ?? '',
     };
 
-    this.authService.loginUser(loginDto).subscribe((response) => {
-      if (response.success && response.data) {
-        this.toastrService.success('Login successful');
-        this.router.navigate(['/spacex-latest-launch']);
-      } else {
-        this.toastrService.error(response.errorMessage);
-      }
-    });
+    this.authService
+      .loginUser(loginDto)
+      .pipe(
+        take(1),
+        tap((response) => {
+          if (response.success && response.data) {
+            this.toastrService.success('Login successful');
+            this.router.navigate(['/spacex-latest-launch']);
+          } else {
+            this.toastrService.error(response.errorMessage);
+          }
+        })
+      )
+      .subscribe();
   }
 
   onRegisterClick() {
